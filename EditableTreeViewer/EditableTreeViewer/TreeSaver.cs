@@ -62,12 +62,19 @@ namespace EditableTreeViewer
                 }
                 else //No child nodes, so we just write the text
                 {
-                    xr.WriteStartElement(node.Name);
-                    xr.WriteStartAttribute("description");
-                    xr.WriteString(node.Text);
-                    xr.WriteEndAttribute();
-                    xr.WriteString(".");
-                    xr.WriteEndElement();
+                    if (node.Name.Contains("#"))
+                    {
+                        xr.WriteString(node.Text);
+                    }
+                    else
+                    {
+                        xr.WriteStartElement(node.Name);
+                        xr.WriteStartAttribute("description");
+                        xr.WriteString(node.Text);
+                        xr.WriteEndAttribute();
+                        xr.WriteString(".");
+                        xr.WriteEndElement();
+                    }
                 }
             }
         }
